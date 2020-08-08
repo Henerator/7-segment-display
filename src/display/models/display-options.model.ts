@@ -1,4 +1,4 @@
-import { Point, Size } from '../../helpers/geometric/models';
+import { Point, Size } from '../../models';
 
 export interface DisplayOptions {
     position: Point;

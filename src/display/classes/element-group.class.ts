@@ -1,7 +1,7 @@
-import { Size, Point } from '../../helpers/geometric';
+import { Size, Point } from '../../models';
 import { DisplayElement } from './index';
 
-export class DisplayElementGroup {
+export class ElementGroup {
     private elements: DisplayElement[];
 
     constructor(position: Point, segmentSize: Size, elementPadding: number) {

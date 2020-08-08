@@ -1,12 +1,12 @@
-import { Point, Size } from '../../helpers/geometric/models';
-import { ElementSegment } from './element-segment.class';
-import { ElementSegmentState } from '../models/element-segment-state.enum';
+import { Point, Size } from '../../models';
+import { Segment } from './segment.class';
+import { SegmentState } from '../models/segment-state.enum';
 
 
 export class DisplayElement {
     private position: Point;
     private segmentSize: Size;
-    private segments: ElementSegment[] = [];
+    private segments: Segment[] = [];
 
     private states = [
         {
@@ -65,13 +65,13 @@ export class DisplayElement {
         };
 
         this.segments = [
-            new ElementSegment({ x: 0, y: 0 }, segmentSize, 0),
-            new ElementSegment({ x: width, y: 0 }, segmentSize, Math.PI / 2),
-            new ElementSegment({ x: width, y: width }, segmentSize, Math.PI / 2),
-            new ElementSegment({ x: 0, y: 2 * width }, segmentSize, 0),
-            new ElementSegment({ x: 0, y: width }, segmentSize, Math.PI / 2),
-            new ElementSegment({ x: 0, y: 0 }, segmentSize, Math.PI / 2),
-            new ElementSegment({ x: 0, y: width }, segmentSize, 0),
+            new Segment({ x: 0, y: 0 }, segmentSize, 0),
+            new Segment({ x: width, y: 0 }, segmentSize, Math.PI / 2),
+            new Segment({ x: width, y: width }, segmentSize, Math.PI / 2),
+            new Segment({ x: 0, y: 2 * width }, segmentSize, 0),
+            new Segment({ x: 0, y: width }, segmentSize, Math.PI / 2),
+            new Segment({ x: 0, y: 0 }, segmentSize, Math.PI / 2),
+            new Segment({ x: 0, y: width }, segmentSize, 0),
         ];
     }
 
@@ -81,15 +81,8 @@ export class DisplayElement {
         context.save();
         context.translate(this.position.x + height / 2, this.position.y + height / 2);
 
-        const sortedSegments = this.segments.slice().sort((a, b) => {
-            return (a.state < b.state)
-                ? -1
-                : 1;
-        });
-
-        sortedSegments.forEach(segment => {
-            segment.draw(context);
-        });
+        const sortedSegments = this.segments.slice().sort((a, b) => a.state - b.state);
+        sortedSegments.forEach(segment => segment.draw(context));
 
         context.restore();
     }
@@ -100,11 +93,11 @@ export class DisplayElement {
         const state = this.states.find(st => st.value === value)
             || this.states[0];
         state.activeSegments.forEach(index => {
-            this.segments[index].state = ElementSegmentState.On;
+            this.segments[index].state = SegmentState.On;
         });
     }
 
     turnOff() {
-        this.segments.forEach(segment => segment.state = ElementSegmentState.Off);
+        this.segments.forEach(segment => segment.state = SegmentState.Off);
     }
 }

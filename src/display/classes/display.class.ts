@@ -1,24 +1,23 @@
 import { DisplayOptions } from '../models';
-import { DisplayElementGroup } from './display-element-group.class';
-import { Point } from '../../helpers/geometric/models';
+import { ElementGroup } from './element-group.class';
+import { Point } from '../../models';
 
 
 export class Display {
-    private groups: DisplayElementGroup[];
+    private groups: ElementGroup[] = [];
 
-    constructor(options: DisplayOptions) {
-        const position = options.position;
+    constructor(private options: DisplayOptions) {
+        this.updatePosition(this.options.position);
+    }
 
-        const segmentSize = options.segmentSize;
-        const secondSegmentSize = options.secondSegmentSize;
+    updatePosition(position: Point) {
+        const { segmentSize, secondSegmentSize, elementPadding, secondElementPadding } = this.options;
 
-        const elementWidth = options.segmentSize.width + options.segmentSize.height;
-        const elementHeight = 2 * options.segmentSize.width + options.segmentSize.height;
-        const elementPadding = options.elementPadding;
+        const elementWidth = segmentSize.width + segmentSize.height;
+        const elementHeight = 2 * segmentSize.width + segmentSize.height;
         const elemengGroupWidth = 2 * elementWidth + elementPadding;
 
-        const secondElementHeight = 2 * options.secondSegmentSize.width + options.secondSegmentSize.height;
-        const secondElementPadding = options.secondElementPadding;
+        const secondElementHeight = 2 * secondSegmentSize.width + secondSegmentSize.height;
 
         const hoursGroupPosition = <Point>{
             x: position.x - elemengGroupWidth - 1.5 * elementPadding,
@@ -35,9 +34,9 @@ export class Display {
         };
 
         this.groups = [
-            new DisplayElementGroup(hoursGroupPosition, segmentSize, elementPadding),
-            new DisplayElementGroup(minutesGroupPosition, segmentSize, elementPadding),
-            new DisplayElementGroup(secondsGroupPosition, secondSegmentSize, secondElementPadding),
+            new ElementGroup(hoursGroupPosition, segmentSize, elementPadding),
+            new ElementGroup(minutesGroupPosition, segmentSize, elementPadding),
+            new ElementGroup(secondsGroupPosition, secondSegmentSize, secondElementPadding),
         ];
     }
 

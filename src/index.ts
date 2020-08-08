@@ -1,5 +1,5 @@
 import { Display } from './display/classes';
-import { Point } from './helpers/geometric/models';
+import { Point } from './/models';
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas');
 const context = <CanvasRenderingContext2D>canvas.getContext('2d');

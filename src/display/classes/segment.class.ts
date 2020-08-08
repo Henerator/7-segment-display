@@ -1,15 +1,15 @@
-import { Point, Size } from '../../helpers/geometric/models';
-import { ElementSegmentState } from '../models';
+import { Point, Size } from '../../models';
+import { SegmentState } from '../models';
 
 
-export class ElementSegment {
+export class Segment {
     private segmentPoints: Point[] = [];
 
     constructor(
         public position: Point,
         public size: Size,
         public angle: number,
-        public state: ElementSegmentState = ElementSegmentState.Off
+        public state: SegmentState = SegmentState.Off
     ) {
         this.generateSegmentPoints(size);
     }
@@ -20,12 +20,16 @@ export class ElementSegment {
         context.translate(this.position.x, this.position.y);
         context.rotate(this.angle);
 
-        if (this.state === ElementSegmentState.On) {
-            context.shadowColor = '#fff';
+        if (this.state === SegmentState.On) {
+            context.shadowColor = '#000';
             context.shadowBlur = 12;
-            context.fillStyle = '#eee';
+            context.fillStyle = '#222';
+            // context.shadowColor = '#fff';
+            // context.shadowBlur = 3;
+            // context.fillStyle = '#eee';
         } else {
-            context.fillStyle = '#373737';
+            // context.fillStyle = '#262626';
+            context.fillStyle = '#e6e6e6';
         }
 
         context.beginPath();
