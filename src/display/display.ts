@@ -1,5 +1,6 @@
 import { Point, DisplayOptions, SegmentState } from '../models';
 import { ElementGroup } from './element-group';
+import { DisplayTheme } from '../models/display-theme';
 
 
 export class Display {
@@ -39,7 +40,26 @@ export class Display {
         ];
     }
 
+    updateTheme(theme: DisplayTheme) {
+        this.options.theme = theme;
+    }
+
+    update() {
+        this.groups.forEach(group => group.turnOff());
+
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+        this.groups[0].setValue(hours);
+        this.groups[1].setValue(minutes);
+        this.groups[2].setValue(seconds);
+    }
+
     draw(context: CanvasRenderingContext2D) {
+        const { segmentOnColor, segmentOffColor, shadowColor, shadowSize } = this.options.theme;
+
         this.groups.forEach(group => {
             group.elements.forEach(element => {
                 const height = element.segmentSize.height;
@@ -55,15 +75,11 @@ export class Display {
                     context.rotate(segment.angle);
 
                     if (segment.state === SegmentState.On) {
-                        context.shadowColor = '#000';
-                        context.shadowBlur = 12;
-                        context.fillStyle = '#222';
-                        // context.shadowColor = '#fff';
-                        // context.shadowBlur = 3;
-                        // context.fillStyle = '#eee';
+                        context.shadowColor = shadowColor;
+                        context.shadowBlur = shadowSize;
+                        context.fillStyle = segmentOnColor;
                     } else {
-                        // context.fillStyle = '#262626';
-                        context.fillStyle = '#e6e6e6';
+                        context.fillStyle = segmentOffColor;
                     }
 
                     context.beginPath();
@@ -83,18 +99,5 @@ export class Display {
                 context.restore();
             });
         });
-    }
-
-    update() {
-        this.groups.forEach(group => group.turnOff());
-
-        const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
-
-        this.groups[0].setValue(hours);
-        this.groups[1].setValue(minutes);
-        this.groups[2].setValue(seconds);
     }
 }
