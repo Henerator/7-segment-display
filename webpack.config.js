@@ -5,9 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.ts',
+    entry: './src/script.ts',
     output: {
-        filename: 'index-[hash].js',
+        filename: 'script-[hash].js',
         path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
@@ -32,8 +32,8 @@ module.exports = {
                     to: './index.html'
                 },
                 {
-                    from: 'src/index.css',
-                    to: './index.css'
+                    from: 'src/style.css',
+                    to: './style.css'
                 },
             ]
         }),
