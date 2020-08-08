@@ -1,4 +1,5 @@
-import { Point, Size } from '../../models';
+import { Point } from "./point.model";
+import { Size } from "./size.model";
 
 export interface DisplayOptions {
     position: Point;

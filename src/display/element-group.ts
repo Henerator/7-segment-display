@@ -1,8 +1,8 @@
-import { Size, Point } from '../../models';
-import { DisplayElement } from './index';
+import { Size, Point } from '../models';
+import { DisplayElement } from './element';
 
 export class ElementGroup {
-    private elements: DisplayElement[];
+    elements: DisplayElement[];
 
     constructor(position: Point, segmentSize: Size, elementPadding: number) {
 
@@ -16,12 +16,6 @@ export class ElementGroup {
             firstElement, 
             secondElement,
         ];
-    }
-
-    draw(context: CanvasRenderingContext2D) {
-        this.elements.forEach(element => {
-            element.draw(context);
-        });
     }
 
     turnOff() {

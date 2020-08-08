@@ -1,12 +1,11 @@
-import { Point, Size } from '../../models';
-import { Segment } from './segment.class';
-import { SegmentState } from '../models/segment-state.enum';
+import { Point, Size, SegmentState } from '../models';
+import { Segment } from './segment';
 
 
 export class DisplayElement {
-    private position: Point;
-    private segmentSize: Size;
-    private segments: Segment[] = [];
+    segments: Segment[] = [];
+    position: Point;
+    segmentSize: Size;
 
     private states = [
         {
@@ -73,18 +72,6 @@ export class DisplayElement {
             new Segment({ x: 0, y: 0 }, segmentSize, Math.PI / 2),
             new Segment({ x: 0, y: width }, segmentSize, 0),
         ];
-    }
-
-    draw(context: CanvasRenderingContext2D) {
-        const height = this.segmentSize.height;
-
-        context.save();
-        context.translate(this.position.x + height / 2, this.position.y + height / 2);
-
-        const sortedSegments = this.segments.slice().sort((a, b) => a.state - b.state);
-        sortedSegments.forEach(segment => segment.draw(context));
-
-        context.restore();
     }
 
     setValue(value: number) {

@@ -1,5 +1,5 @@
-import { Display } from './display/classes';
-import { Point } from './/models';
+import { Display } from './display';
+import { Point } from './models';
 
 const canvas = <HTMLCanvasElement>document.getElementById('canvas');
 const context = <CanvasRenderingContext2D>canvas.getContext('2d');
@@ -12,10 +12,6 @@ let display: Display;
 
 window.addEventListener('resize', resizeCanvas, false);
 
-updateCanvasSize();
-createDisplay();
-updateDisplay();
-
 function createDisplay() {
     display = new Display({
         position: centerPoint,
@@ -26,13 +22,8 @@ function createDisplay() {
     });
 }
 
-function updateDisplay() {
-    clear();
-
-    display.setTime();
-    display.draw(context);
-
-    setTimeout(updateDisplay, 1000);
+function update() {
+    display.update();
 }
 
 function updateCanvasSize() {
@@ -51,8 +42,8 @@ function updateCanvasSize() {
 function resizeCanvas() {
     updateCanvasSize();
     display.updatePosition(centerPoint);
-    display.setTime();
-    display.draw(context);
+    update();
+    draw();
 }
 
 function clear() {
@@ -60,3 +51,24 @@ function clear() {
     context.fillStyle = '#fff';
     context.fillRect(0, 0, width, height);
 }
+
+function drawDisplay() {
+    display.draw(context);
+}
+
+function draw() {
+    clear();
+    drawDisplay();
+}
+
+function mainLoop() {
+    update();
+    draw();
+
+    setTimeout(mainLoop, 1000);
+}
+
+updateCanvasSize();
+createDisplay();
+
+mainLoop();
