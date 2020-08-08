@@ -1,15 +1,32 @@
 {
   "name": "7-segment-display",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "full window canvas 7 segment dislpay",
+  "main": "index.html",
   "scripts": {
-    "start": "parcel src/index.html"
+    "start": "webpack-dev-server --mode=development",
+    "build": "webpack",
+    "build:prod": "webpack --config webpack.config.prod.js"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Henerator/7-segment-display.git"
+  },
+  "author": "roman makarov",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Henerator/7-segment-display/issues"
+  },
+  "homepage": "https://github.com/Henerator/7-segment-display#readme",
   "devDependencies": {
-    "parcel-bundler": "^1.11.0",
-    "typescript": "^3.2.2"
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.0.3",
+    "html-webpack-plugin": "^4.3.0",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.1.1"
   }
 }
