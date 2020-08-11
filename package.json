@@ -1,8 +1,8 @@
 {
   "name": "7-segment-display",
   "version": "1.0.0",
-  "description": "full window canvas 7 segment dislpay",
-  "main": "index.html",
+  "description": "Full window canvas 7 segment dislpay",
+  "main": "dist/index.html",
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "build": "webpack",
@@ -28,5 +28,6 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.1.1"
-  }
+  },
+  "dependencies": {}
 }

@@ -16,8 +16,8 @@ const themes = {
             background: '#fff',
         },
         display: {
-            segmentOnColor: '#222',
-            segmentOffColor: '#e6e6e6',
+            segmentOnColor: '#000',
+            segmentOffColor: '#e4e4e4',
             shadowColor: '#000',
             shadowSize: 3,
         },
@@ -27,7 +27,7 @@ const themes = {
             background: '#222',
         },
         display: {
-            segmentOnColor: '#eee',
+            segmentOnColor: '#fff',
             segmentOffColor: '#262626',
             shadowColor: '#fff',
             shadowSize: 3,

@@ -41,6 +41,7 @@ module.exports = {
             template: 'src/index.html',
         })
     ],
+    devtool: 'none',
     devServer: {
         contentBase: 'dist',
         compress: true,
